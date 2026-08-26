@@ -8,8 +8,6 @@
 import os
 import requests
 
-from typing import TypedDict
-
 from dotenv import load_dotenv
 
 from fastapi import FastAPI, HTTPException
@@ -20,7 +18,7 @@ from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 
-from langgraph.graph import StateGraph, START, END
+from ai_agent import ask_weather_ai
 
 
 # ============================================================
@@ -41,7 +39,7 @@ GROQ_MODEL = "openai/gpt-oss-20b"
 app = FastAPI(
     title="AI Weather Platform API",
     description="Backend API for the AI Weather Intelligence Platform",
-    version="2.0.0",
+    version="2.1.0",
 )
 
 
@@ -51,16 +49,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ],
-
     allow_credentials=True,
-
     allow_methods=["*"],
-
     allow_headers=["*"],
 )
 
@@ -71,10 +65,9 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-
     return {
         "message": "AI Weather Platform Backend is running!",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "langchain": True,
         "langgraph": True,
     }
@@ -86,7 +79,6 @@ def root():
 
 @app.get("/api/health")
 def health():
-
     return {
         "status": "ok",
         "backend": "FastAPI",
@@ -97,7 +89,7 @@ def health():
 
 
 # ============================================================
-# WEATHER ENDPOINT
+# WEATHER ENDPOINT (used by the search bar / map / dashboard)
 # ============================================================
 
 @app.get("/api/weather")
@@ -107,34 +99,18 @@ def get_weather(
     city: str | None = None,
 ):
 
-    # ========================================================
-    # LOCATION VARIABLES
-    # ========================================================
-
     location_name = "Selected Location"
     country = ""
     country_code = ""
-
-    # ========================================================
-    # OPTION 1
-    # LATITUDE + LONGITUDE
-    # ========================================================
 
     if latitude is not None and longitude is not None:
 
         final_latitude = latitude
         final_longitude = longitude
 
-    # ========================================================
-    # OPTION 2
-    # CITY NAME
-    # ========================================================
-
     elif city:
 
-        geocoding_url = (
-            "https://geocoding-api.open-meteo.com/v1/search"
-        )
+        geocoding_url = "https://geocoding-api.open-meteo.com/v1/search"
 
         geocoding_params = {
             "name": city,
@@ -144,26 +120,21 @@ def get_weather(
         }
 
         try:
-
             response = requests.get(
                 geocoding_url,
                 params=geocoding_params,
                 timeout=10,
             )
-
             response.raise_for_status()
-
             data = response.json()
 
         except requests.RequestException as error:
-
             raise HTTPException(
                 status_code=500,
                 detail=f"Geocoding API error: {error}",
             )
 
         if not data.get("results"):
-
             raise HTTPException(
                 status_code=404,
                 detail=f"City '{city}' not found.",
@@ -174,49 +145,21 @@ def get_weather(
         final_latitude = location["latitude"]
         final_longitude = location["longitude"]
 
-        location_name = location.get(
-            "name",
-            city,
-        )
-
-        country = location.get(
-            "country",
-            "",
-        )
-
-        country_code = location.get(
-            "country_code",
-            "",
-        )
-
-    # ========================================================
-    # INVALID REQUEST
-    # ========================================================
+        location_name = location.get("name", city)
+        country = location.get("country", "")
+        country_code = location.get("country_code", "")
 
     else:
-
         raise HTTPException(
             status_code=400,
-            detail=(
-                "Please provide either latitude and longitude "
-                "or city."
-            ),
+            detail="Please provide either latitude and longitude or city.",
         )
 
-    # ========================================================
-    # OPEN-METEO
-    # ========================================================
-
-    weather_url = (
-        "https://api.open-meteo.com/v1/forecast"
-    )
+    weather_url = "https://api.open-meteo.com/v1/forecast"
 
     weather_params = {
-
         "latitude": final_latitude,
-
         "longitude": final_longitude,
-
         "current": (
             "temperature_2m,"
             "relative_humidity_2m,"
@@ -224,69 +167,110 @@ def get_weather(
             "weather_code,"
             "wind_speed_10m"
         ),
-
         "hourly": (
             "temperature_2m,"
             "relative_humidity_2m,"
             "precipitation_probability,"
             "weather_code"
         ),
-
         "daily": (
             "weather_code,"
             "temperature_2m_max,"
             "temperature_2m_min,"
             "precipitation_probability_max"
         ),
-
         "timezone": "auto",
-
         "forecast_days": 7,
     }
 
-    # ========================================================
-    # REQUEST WEATHER
-    # ========================================================
-
     try:
-
-        response = requests.get(
-            weather_url,
-            params=weather_params,
-            timeout=10,
-        )
-
+        response = requests.get(weather_url, params=weather_params, timeout=10)
         response.raise_for_status()
-
         weather_data = response.json()
 
     except requests.RequestException as error:
-
         raise HTTPException(
             status_code=500,
             detail=f"Weather API error: {error}",
         )
 
-    # ========================================================
-    # RETURN
-    # ========================================================
-
     return {
-
         "location": {
-
             "name": location_name,
-
             "country": country,
-
             "country_code": country_code,
-
             "latitude": final_latitude,
-
             "longitude": final_longitude,
         },
-
         "weather": weather_data,
+    }
+
+
+# ============================================================
+# EARTHQUAKE ENDPOINT (dashboard card)
+# ------------------------------------------------------------
+# Uses USGS — free, no API key, real-time, global coverage.
+# ============================================================
+
+EARTHQUAKE_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query"
+
+
+@app.get("/api/earthquakes")
+def get_earthquakes(
+    latitude: float,
+    longitude: float,
+    radius_km: float = 500,
+    min_magnitude: float = 2.5,
+    days: int = 30,
+):
+
+    params = {
+        "format": "geojson",
+        "latitude": latitude,
+        "longitude": longitude,
+        "maxradiuskm": radius_km,
+        "minmagnitude": min_magnitude,
+        "orderby": "time",
+        "limit": 15,
+    }
+
+    try:
+        response = requests.get(EARTHQUAKE_URL, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+    except requests.RequestException as error:
+        raise HTTPException(
+            status_code=500,
+            detail=f"USGS Earthquake API error: {error}",
+        )
+
+    earthquakes = []
+
+    for feature in data.get("features", []):
+
+        properties = feature.get("properties", {})
+        geometry = feature.get("geometry", {})
+        coordinates = geometry.get("coordinates", [None, None, None])
+
+        earthquakes.append({
+            "magnitude": properties.get("mag"),
+            "place": properties.get("place"),
+            "time": properties.get("time"),
+            "depth_km": coordinates[2] if len(coordinates) > 2 else None,
+            "latitude": coordinates[1] if len(coordinates) > 1 else None,
+            "longitude": coordinates[0] if len(coordinates) > 0 else None,
+            "url": properties.get("url"),
+        })
+
+    return {
+        "location": {
+            "latitude": latitude,
+            "longitude": longitude,
+        },
+        "radius_km": radius_km,
+        "count": len(earthquakes),
+        "earthquakes": earthquakes,
     }
 
 
@@ -304,291 +288,29 @@ class AIWeatherRequest(BaseModel):
 
     latitude: float = Field(
         ...,
-        description="Location latitude",
+        description="Current search-bar location latitude (fallback only)",
     )
 
     longitude: float = Field(
         ...,
-        description="Location longitude",
+        description="Current search-bar location longitude (fallback only)",
     )
 
     location_name: str = Field(
         default="Selected Location",
-        description="Current location name",
+        description="Current search-bar location name (fallback only)",
     )
-
-
-# ============================================================
-# LANGGRAPH STATE
-# ============================================================
-
-class WeatherAgentState(TypedDict):
-
-    question: str
-
-    weather: dict
-
-    location_name: str
-
-    answer: str
-
-
-# ============================================================
-# GET WEATHER FOR AI
-# ============================================================
-
-def get_weather_for_ai(
-    latitude: float,
-    longitude: float,
-):
-
-    weather_url = (
-        "https://api.open-meteo.com/v1/forecast"
-    )
-
-    weather_params = {
-
-        "latitude": latitude,
-
-        "longitude": longitude,
-
-        "current": (
-            "temperature_2m,"
-            "relative_humidity_2m,"
-            "apparent_temperature,"
-            "weather_code,"
-            "wind_speed_10m"
-        ),
-
-        "hourly": (
-            "temperature_2m,"
-            "relative_humidity_2m,"
-            "precipitation_probability,"
-            "weather_code"
-        ),
-
-        "daily": (
-            "weather_code,"
-            "temperature_2m_max,"
-            "temperature_2m_min,"
-            "precipitation_probability_max"
-        ),
-
-        "timezone": "auto",
-
-        "forecast_days": 7,
-    }
-
-    try:
-
-        response = requests.get(
-            weather_url,
-            params=weather_params,
-            timeout=10,
-        )
-
-        response.raise_for_status()
-
-        return response.json()
-
-    except requests.RequestException as error:
-
-        raise HTTPException(
-            status_code=500,
-            detail=f"Weather API error: {error}",
-        )
-
-
-# ============================================================
-# LANGGRAPH NODE
-# WEATHER
-# ============================================================
-
-def weather_node(
-    state: WeatherAgentState,
-):
-
-    # Weather has already been fetched before
-    # entering the graph.
-
-    return state
-
-
-# ============================================================
-# LANGGRAPH NODE
-# AI
-# ============================================================
-
-def ai_node(
-    state: WeatherAgentState,
-):
-
-    if not GROQ_API_KEY:
-
-        raise Exception(
-            "GROQ_API_KEY is not configured."
-        )
-
-    # ========================================================
-    # CREATE LLM (Groq, via OpenAI-compatible endpoint)
-    # ========================================================
-
-    llm = ChatOpenAI(
-
-        model=GROQ_MODEL,
-
-        temperature=0.2,
-
-        api_key=GROQ_API_KEY,
-
-        base_url=GROQ_BASE_URL,
-    )
-
-    # ========================================================
-    # WEATHER DATA
-    # ========================================================
-
-    weather = state["weather"]
-
-    current = weather.get(
-        "current",
-        {},
-    )
-
-    daily = weather.get(
-        "daily",
-        {},
-    )
-
-    location_name = state.get(
-        "location_name",
-        "Selected Location",
-    )
-
-    question = state["question"]
-
-    # ========================================================
-    # AI PROMPT
-    # ========================================================
-
-    prompt = f"""
-You are the AI Weather Assistant inside an AI Weather
-Intelligence Platform.
-
-Location:
-{location_name}
-
-The user asked:
-
-{question}
-
-You MUST answer using the provided live weather data.
-
-Current weather:
-{current}
-
-7-day forecast:
-{daily}
-
-Rules:
-
-1. Do not invent weather information.
-2. Use only the supplied weather data.
-3. Answer directly.
-4. Keep the answer concise but useful.
-5. Explain weather in simple language.
-6. If the question asks about rain, use precipitation
-   probability and weather code where appropriate.
-7. If the question asks about outdoor activities,
-   give a practical recommendation based on the data.
-8. If the question asks about clothing, base it on
-   temperature, apparent temperature and weather conditions.
-9. Mention uncertainty if the available data cannot
-   completely answer the question.
-
-Return ONLY the answer to the user.
-"""
-
-    # ========================================================
-    # CALL GROQ
-    # ========================================================
-
-    response = llm.invoke(
-        [
-            HumanMessage(
-                content=prompt
-            )
-        ]
-    )
-
-    # ========================================================
-    # SAVE ANSWER
-    # ========================================================
-
-    state["answer"] = response.content
-
-    return state
-
-
-# ============================================================
-# BUILD LANGGRAPH
-# ============================================================
-
-def build_weather_graph():
-
-    graph = StateGraph(
-        WeatherAgentState
-    )
-
-    # --------------------------------------------------------
-    # NODES
-    # --------------------------------------------------------
-
-    graph.add_node(
-        "weather",
-        weather_node,
-    )
-
-    graph.add_node(
-        "ai",
-        ai_node,
-    )
-
-    # --------------------------------------------------------
-    # EDGES
-    # --------------------------------------------------------
-
-    graph.add_edge(
-        START,
-        "weather",
-    )
-
-    graph.add_edge(
-        "weather",
-        "ai",
-    )
-
-    graph.add_edge(
-        "ai",
-        END,
-    )
-
-    # --------------------------------------------------------
-    # COMPILE
-    # --------------------------------------------------------
-
-    return graph.compile()
-
-
-# ============================================================
-# CREATE GRAPH
-# ============================================================
-
-weather_graph = build_weather_graph()
 
 
 # ============================================================
 # AI WEATHER ENDPOINT
+# ------------------------------------------------------------
+# This now delegates to ask_weather_ai() in ai_agent.py, which:
+#   1. Checks if the question mentions a specific city
+#      ("weather in Lahore?")
+#   2. If yes -> geocodes + fetches weather for THAT city
+#   3. If no  -> falls back to the search-bar location sent below
+# So the AI is no longer locked to whatever the search bar says.
 # ============================================================
 
 @app.post("/api/ai/weather")
@@ -596,108 +318,42 @@ def ask_weather_endpoint(
     request: AIWeatherRequest,
 ):
 
-    # ========================================================
-    # CHECK API KEY
-    # ========================================================
-
     if not GROQ_API_KEY:
-
         raise HTTPException(
             status_code=500,
             detail="GROQ_API_KEY is not configured.",
         )
 
-    # ========================================================
-    # GET LIVE WEATHER
-    # ========================================================
-
     try:
-
-        weather_data = get_weather_for_ai(
-            request.latitude,
-            request.longitude,
-        )
-
-    except HTTPException:
-
-        raise
-
-    except Exception as error:
-
-        raise HTTPException(
-            status_code=500,
-            detail=f"Unable to get weather data: {error}",
-        )
-
-    # ========================================================
-    # INITIAL GRAPH STATE
-    # ========================================================
-
-    initial_state: WeatherAgentState = {
-
-        "question": request.question,
-
-        "weather": weather_data,
-
-        "location_name": request.location_name,
-
-        "answer": "",
-    }
-
-    # ========================================================
-    # RUN LANGGRAPH
-    # ========================================================
-
-    try:
-
-        result = weather_graph.invoke(
-            initial_state
+        result = ask_weather_ai(
+            question=request.question,
+            default_latitude=request.latitude,
+            default_longitude=request.longitude,
+            default_location_name=request.location_name,
         )
 
     except Exception as error:
-
-        print(
-            "LANGGRAPH ERROR:",
-            repr(error),
-        )
-
+        print("AI AGENT ERROR:", repr(error))
         raise HTTPException(
             status_code=500,
             detail=f"AI processing error: {error}",
         )
 
-    # ========================================================
-    # RETURN AI RESPONSE
-    # ========================================================
-
     return {
-
         "status": "success",
-
         "question": request.question,
-
-        "location": request.location_name,
-
-        "answer": result.get(
-            "answer",
-            "Unable to generate an AI response.",
-        ),
+        # this may now be DIFFERENT from request.location_name
+        # if the user asked about another city
+        "location": result["resolved_location"],
+        "extracted_city": result["extracted_city"],
+        "wants_earthquake": result.get("wants_earthquake", False),
+        "earthquake_count": result.get("earthquake_count", 0),
+        "answer": result["answer"],
     }
 
 
 # ============================================================
-# SIMPLE AI ENDPOINT
-# ============================================================
-#
-# This endpoint is kept for compatibility.
-#
-# It accepts:
-#
-# {
-#     "question": "...",
-#     "weather_context": "..."
-# }
-#
+# SIMPLE AI ENDPOINT (kept for compatibility)
 # ============================================================
 
 class SimpleAIWeatherRequest(BaseModel):
@@ -718,22 +374,16 @@ def weather_ai(
 ):
 
     if not GROQ_API_KEY:
-
         raise HTTPException(
             status_code=500,
             detail="GROQ_API_KEY is not configured.",
         )
 
     try:
-
         llm = ChatOpenAI(
-
             model=GROQ_MODEL,
-
             temperature=0.2,
-
             api_key=GROQ_API_KEY,
-
             base_url=GROQ_BASE_URL,
         )
 
@@ -754,28 +404,15 @@ Do not invent information.
 Give a concise and useful answer.
 """
 
-        response = llm.invoke(
-            [
-                HumanMessage(
-                    content=prompt
-                )
-            ]
-        )
+        response = llm.invoke([HumanMessage(content=prompt)])
 
         return {
-
             "answer": response.content,
-
             "status": "success",
         }
 
     except Exception as error:
-
-        print(
-            "SIMPLE AI ERROR:",
-            repr(error),
-        )
-
+        print("SIMPLE AI ERROR:", repr(error))
         raise HTTPException(
             status_code=500,
             detail=f"AI error: {error}",
@@ -788,7 +425,6 @@ Give a concise and useful answer.
 
 @app.on_event("startup")
 def startup_event():
-
     print("")
     print("=" * 60)
     print("AI WEATHER INTELLIGENCE PLATFORM")

@@ -1,17 +1,14 @@
-# Node
-node_modules/
-.next/
-
-# Env secrets
-.env
-.env.local
-backend/.env
+# Node / Next.js
+**/node_modules/
+**/.next/
+**/*.log
 
 # Python
-__pycache__/
-venv/
-*.pyc
+**/__pycache__/
+**/venv/
+**/.env
 
 # OS
 .DS_Store
 Thumbs.db
+My-Projects/
