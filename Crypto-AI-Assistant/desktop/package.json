@@ -1,0 +1,22 @@
+{
+  "name": "crypto-ai-assistant-desktop",
+  "version": "1.0.0",
+  "description": "Desktop wrapper for the Crypto AI Assistant (Next.js + Flask)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^32.1.2",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.cryptoai.assistant",
+    "productName": "Crypto AI Assistant",
+    "files": ["main.js", "preload.js"],
+    "mac": { "target": "dmg" },
+    "win": { "target": "nsis" },
+    "linux": { "target": "AppImage" }
+  }
+}
