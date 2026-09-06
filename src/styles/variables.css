@@ -1,0 +1,365 @@
+/* ==========================================================
+   VARIABLES.CSS
+   Premium Portfolio Design System
+   Maryam Fahim Portfolio
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+
+/* ==========================================================
+   DARK MODE — DEFAULT
+========================================================== */
+
+:root {
+
+    /* COLORS */
+
+    --bg-color: #050816;
+    --bg-secondary: #0b1120;
+
+    --bg-card: rgba(255, 255, 255, 0.055);
+
+    --primary: #4F8CFF;
+    --secondary: #7C5CFF;
+    --accent: #22D3EE;
+
+    --white: #ffffff;
+
+    --text: #E2E8F0;
+    --text-light: #94A3B8;
+
+    --border: rgba(255, 255, 255, 0.12);
+
+    --success: #22C55E;
+    --danger: #EF4444;
+
+
+    /* GRADIENTS */
+
+    --gradient-primary:
+        linear-gradient(
+            135deg,
+            #4F8CFF,
+            #7C5CFF
+        );
+
+    --gradient-secondary:
+        linear-gradient(
+            135deg,
+            #22D3EE,
+            #4F8CFF
+        );
+
+    --gradient-dark:
+        linear-gradient(
+            180deg,
+            #050816,
+            #0b1120
+        );
+
+
+    /* GLASS */
+
+    --glass-bg:
+        rgba(255, 255, 255, 0.055);
+
+    --glass-border:
+        rgba(255, 255, 255, 0.13);
+
+    --glass-blur: 18px;
+
+
+    /* SHADOWS */
+
+    --shadow-sm:
+        0 5px 20px rgba(0, 0, 0, 0.25);
+
+    --shadow-md:
+        0 10px 40px rgba(0, 0, 0, 0.35);
+
+    --shadow-lg:
+        0 25px 60px rgba(0, 0, 0, 0.45);
+
+
+    /* GLOWS */
+
+    --glow-blue:
+        0 0 25px rgba(79, 140, 255, 0.45);
+
+    --glow-purple:
+        0 0 30px rgba(124, 92, 255, 0.45);
+
+    --glow-cyan:
+        0 0 25px rgba(34, 211, 238, 0.45);
+
+
+    /* RADIUS */
+
+    --radius-xs: 8px;
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-round: 999px;
+
+
+    /* FONTS */
+
+    --font-main: "Outfit", sans-serif;
+    --font-display: "Space Grotesk", sans-serif;
+
+
+    /* FONT SIZES */
+
+    --fs-xs: .8rem;
+    --fs-sm: .9rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.15rem;
+    --fs-xl: 1.4rem;
+
+    --fs-2xl: 2rem;
+    --fs-3xl: 3rem;
+    --fs-4xl: 4rem;
+    --fs-5xl: 5rem;
+    --fs-6xl: 6rem;
+
+
+    /* FONT WEIGHTS */
+
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semibold: 600;
+    --bold: 700;
+    --extrabold: 800;
+    --black: 900;
+
+
+    /* SPACING */
+
+    --space-xs: .5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+    --space-3xl: 6rem;
+    --space-4xl: 8rem;
+
+
+    /* SECTION */
+
+    --section-padding: 120px;
+    --container: 1320px;
+
+
+    /* TRANSITIONS */
+
+    --transition-fast: .25s ease;
+    --transition: .4s ease;
+    --transition-slow: .7s ease;
+
+    --cubic:
+        cubic-bezier(.22, .61, .36, 1);
+
+
+    /* Z-INDEX */
+
+    --z-loader: 99999;
+    --z-cursor: 9999;
+    --z-nav: 999;
+    --z-modal: 500;
+    --z-overlay: 100;
+}
+
+
+/* ==========================================================
+   LIGHT MODE
+========================================================== */
+
+html[data-theme="light"] {
+
+    --bg-color: #F1F4F8;
+
+    --bg-secondary: #E6EBF2;
+
+    --bg-card:
+        rgba(255, 255, 255, 0.72);
+
+
+    /* BRAND */
+
+    --primary: #316FE8;
+
+    --secondary: #7055D8;
+
+    --accent: #0797A5;
+
+
+    /* TEXT */
+
+    --white: #172033;
+
+    --text: #182235;
+
+    --text-light: #536176;
+
+
+    /* BORDER */
+
+    --border:
+        rgba(23, 32, 51, 0.14);
+
+
+    /* STATUS */
+
+    --success: #159B5C;
+
+    --danger: #D64545;
+
+
+    /* GLASS */
+
+    --glass-bg:
+        rgba(255, 255, 255, 0.68);
+
+    --glass-border:
+        rgba(23, 32, 51, 0.13);
+
+    --glass-blur: 18px;
+
+
+    /* SHADOWS */
+
+    --shadow-sm:
+        0 5px 20px rgba(23, 32, 51, 0.10);
+
+    --shadow-md:
+        0 10px 40px rgba(23, 32, 51, 0.13);
+
+    --shadow-lg:
+        0 25px 60px rgba(23, 32, 51, 0.16);
+
+
+    /* GLOWS */
+
+    --glow-blue:
+        0 0 25px rgba(49, 111, 232, 0.24);
+
+    --glow-purple:
+        0 0 30px rgba(112, 85, 216, 0.20);
+
+    --glow-cyan:
+        0 0 25px rgba(7, 151, 165, 0.20);
+
+
+    /* GRADIENTS */
+
+    --gradient-primary:
+        linear-gradient(
+            135deg,
+            #316FE8,
+            #7055D8
+        );
+
+    --gradient-secondary:
+        linear-gradient(
+            135deg,
+            #0797A5,
+            #316FE8
+        );
+
+    --gradient-dark:
+        linear-gradient(
+            180deg,
+            #F1F4F8,
+            #E6EBF2
+        );
+}
+
+
+/* ==========================================================
+   GLOBAL THEME TRANSITION
+========================================================== */
+
+html,
+body,
+header,
+nav,
+main,
+section,
+footer,
+article,
+div,
+button,
+a,
+input,
+textarea {
+
+    transition:
+        background-color .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+}
+
+
+/* ==========================================================
+   SELECTION
+========================================================== */
+
+::selection {
+
+    background:
+        var(--primary);
+
+    color:
+        #ffffff;
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+html {
+
+    scrollbar-color:
+        var(--primary)
+        var(--bg-color);
+
+    scrollbar-width:
+        thin;
+}
+
+
+/* ==========================================================
+   RESPONSIVE FONT SIZES
+========================================================== */
+
+@media (max-width: 992px) {
+
+    :root {
+
+        --fs-6xl: 4.5rem;
+        --fs-5xl: 4rem;
+        --fs-4xl: 3rem;
+
+        --section-padding: 100px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    :root {
+
+        --fs-6xl: 3.5rem;
+        --fs-5xl: 3rem;
+        --fs-4xl: 2.5rem;
+        --fs-3xl: 2rem;
+
+        --section-padding: 80px;
+    }
+}
