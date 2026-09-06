@@ -1,0 +1,559 @@
+/* ==========================================================
+   ANIMATIONS.CSS
+   Premium Portfolio Animations
+========================================================== */
+
+
+/* ==========================================
+   FLOATING AURORA
+========================================== */
+
+@keyframes floatGradient{
+
+    0%{
+
+        transform:
+        translate(0,0)
+        scale(1);
+
+    }
+
+    50%{
+
+        transform:
+        translate(80px,-60px)
+        scale(1.2);
+
+    }
+
+    100%{
+
+        transform:
+        translate(-60px,80px)
+        scale(.9);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   ROTATING ORBITS
+========================================== */
+
+@keyframes rotateOrbit{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   FLOATING
+========================================== */
+
+@keyframes floating{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-18px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   GLOW PULSE
+========================================== */
+
+@keyframes glow{
+
+    0%{
+
+        box-shadow:
+
+        0 0 10px rgba(79,140,255,.25);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+        0 0 40px rgba(79,140,255,.65);
+
+    }
+
+    100%{
+
+        box-shadow:
+
+        0 0 10px rgba(79,140,255,.25);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   FADE UP
+========================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   FADE LEFT
+========================================== */
+
+@keyframes fadeLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateX(-80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateX(0);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   FADE RIGHT
+========================================== */
+
+@keyframes fadeRight{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateX(80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateX(0);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SCALE
+========================================== */
+
+@keyframes scaleUp{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   ROTATE
+========================================== */
+
+@keyframes rotateSlow{
+
+    from{
+
+        transform:rotate(0);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SHIMMER
+========================================== */
+
+@keyframes shimmer{
+
+    from{
+
+        transform:translateX(-120%);
+
+    }
+
+    to{
+
+        transform:translateX(220%);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SCROLL MOUSE
+========================================== */
+
+@keyframes mouseWheel{
+
+    0%{
+
+        opacity:0;
+
+        transform:translateY(0);
+
+    }
+
+    40%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   BOUNCE
+========================================== */
+
+@keyframes bounce{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   TEXT REVEAL
+========================================== */
+
+@keyframes reveal{
+
+    from{
+
+        opacity:0;
+
+        letter-spacing:12px;
+
+    }
+
+    to{
+
+        opacity:1;
+
+        letter-spacing:2px;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   BLINK
+========================================== */
+
+@keyframes blink{
+
+    0%,50%{
+
+        opacity:1;
+
+    }
+
+    51%,100%{
+
+        opacity:0;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SPIN
+========================================== */
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   LOADER BAR
+========================================== */
+
+@keyframes loading{
+
+    from{
+
+        width:0;
+
+    }
+
+    to{
+
+        width:100%;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   BACKGROUND STAR
+========================================== */
+
+@keyframes twinkle{
+
+    0%{
+
+        opacity:.2;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.2;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   CLASS HELPERS
+========================================== */
+
+.fade-up{
+
+    animation:
+
+    fadeUp
+
+    .9s
+
+    ease
+
+    both;
+
+}
+
+
+
+.fade-left{
+
+    animation:
+
+    fadeLeft
+
+    .9s
+
+    ease
+
+    both;
+
+}
+
+
+
+.fade-right{
+
+    animation:
+
+    fadeRight
+
+    .9s
+
+    ease
+
+    both;
+
+}
+
+
+
+.scale-up{
+
+    animation:
+
+    scaleUp
+
+    .8s
+
+    ease
+
+    both;
+
+}
+
+
+
+.floating{
+
+    animation:
+
+    floating
+
+    5s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+
+
+.glow{
+
+    animation:
+
+    glow
+
+    3s
+
+    infinite;
+
+}
