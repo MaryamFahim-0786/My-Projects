@@ -1,0 +1,357 @@
+/* ==========================================================
+   CURSOR.CSS
+   Premium Cursor
+========================================================== */
+
+/* Hide default cursor on desktop */
+
+@media (min-width: 992px){
+
+*{
+    cursor:none;
+}
+
+}
+
+/* ==========================================
+   CURSOR DOT
+========================================== */
+
+.cursor-dot{
+
+    position:fixed;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:var(--white);
+
+    pointer-events:none;
+
+    z-index:var(--z-cursor);
+
+    transform:translate(-50%,-50%);
+
+    transition:
+    width .25s,
+    height .25s,
+    background .25s;
+
+}
+
+/* ==========================================
+   CURSOR RING
+========================================== */
+
+.cursor-ring{
+
+    position:fixed;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(79,140,255,.65);
+
+    pointer-events:none;
+
+    z-index:var(--z-cursor);
+
+    transform:translate(-50%,-50%);
+
+    transition:
+
+    width .35s,
+
+    height .35s,
+
+    border-color .35s,
+
+    transform .08s;
+
+}
+
+/* ==========================================
+   GLOW
+========================================== */
+
+.cursor-glow{
+
+    position:fixed;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+    circle,
+
+    rgba(79,140,255,.25),
+
+    transparent 70%
+
+    );
+
+    filter:blur(40px);
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    z-index:998;
+
+}
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.cursor-ring.active{
+
+    width:70px;
+
+    height:70px;
+
+    border-color:var(--accent);
+
+}
+
+.cursor-dot.active{
+
+    background:var(--accent);
+
+}
+
+/* ==========================================
+   CLICK
+========================================== */
+
+.cursor-ring.click{
+
+    transform:
+
+    translate(-50%,-50%)
+
+    scale(.75);
+
+}
+
+/* ==========================================
+   LINKS
+========================================== */
+
+a:hover ~
+
+.cursor-ring{
+
+    border-color:var(--primary);
+
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+button:hover,
+
+.btn:hover{
+
+    transform:
+
+    translateY(-6px)
+
+    scale(1.02);
+
+}
+
+/* ==========================================
+   IMAGE
+========================================== */
+
+.hero-frame{
+
+    transition:.45s var(--cubic);
+
+}
+
+.hero-frame:hover{
+
+    transform:
+
+    rotateY(8deg)
+
+    rotateX(6deg)
+
+    scale(1.03);
+
+}
+
+/* ==========================================
+   PROJECT CARD
+========================================== */
+
+.project-card{
+
+    transition:
+
+    transform .45s,
+
+    box-shadow .45s,
+
+    border-color .45s;
+
+}
+
+.project-card:hover{
+
+    box-shadow:
+
+    0 25px 60px rgba(79,140,255,.20);
+
+}
+
+/* ==========================================
+   SERVICE CARD
+========================================== */
+
+.service-card:hover{
+
+    box-shadow:
+
+    0 25px 60px rgba(124,92,255,.20);
+
+}
+
+/* ==========================================
+   SOCIAL
+========================================== */
+
+.hero-socials a,
+
+.footer-social a{
+
+    transition:
+
+    .35s;
+
+}
+
+.hero-socials a:hover,
+
+.footer-social a:hover{
+
+    transform:
+
+    translateY(-8px)
+
+    scale(1.1);
+
+}
+
+/* ==========================================
+   IMAGE GLOW
+========================================== */
+
+.image-glow{
+
+    position:absolute;
+
+    inset:-30px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+    circle,
+
+    rgba(79,140,255,.25),
+
+    transparent 70%
+
+    );
+
+    filter:blur(60px);
+
+    animation:
+
+    glow
+
+    4s
+
+    infinite;
+
+}
+
+/* ==========================================
+   SCROLL INDICATOR
+========================================== */
+
+.mouse{
+
+    width:32px;
+
+    height:52px;
+
+    border:2px solid rgba(255,255,255,.2);
+
+    border-radius:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:auto;
+
+}
+
+.mouse span{
+
+    width:4px;
+
+    height:10px;
+
+    border-radius:10px;
+
+    background:var(--white);
+
+    margin-top:10px;
+
+    animation:
+
+    mouseWheel
+
+    2s
+
+    infinite;
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:991px){
+
+.cursor-dot,
+
+.cursor-ring,
+
+.cursor-glow{
+
+    display:none;
+
+}
+
+}

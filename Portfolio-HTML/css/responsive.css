@@ -1,0 +1,187 @@
+/* ==========================================================
+   RESPONSIVE DESIGN
+   Mobile + Tablet
+========================================================== */
+
+
+/* Large Tablets / Small Laptops */
+@media (max-width: 1024px){
+
+    .container{
+        width: 90%;
+    }
+
+    .hero{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content{
+        width: 100%;
+    }
+
+    .hero-image{
+        margin-top: 40px;
+    }
+
+    .skills-grid,
+    .projects-grid{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+}
+
+
+/* Tablets */
+@media (max-width: 768px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+
+    /* Navbar */
+
+    nav{
+        padding:20px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+
+    .menu-btn{
+        display:block;
+    }
+
+
+    /* Hero */
+
+    .hero{
+        padding-top:120px;
+    }
+
+
+    .hero h1{
+        font-size:40px;
+    }
+
+
+    .hero p{
+        font-size:16px;
+    }
+
+
+    .hero-buttons{
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+
+    /* Sections */
+
+    section{
+        padding:70px 0;
+    }
+
+
+    .section-title{
+        font-size:32px;
+    }
+
+
+    /* Cards */
+
+    .skills-grid,
+    .projects-grid{
+        grid-template-columns:1fr;
+    }
+
+
+    .about-content{
+        text-align:center;
+    }
+
+
+}
+
+
+/* Mobile Phones */
+@media (max-width:480px){
+
+    .container{
+        width:92%;
+    }
+
+
+    .logo{
+        font-size:22px;
+    }
+
+
+    .hero h1{
+        font-size:32px;
+    }
+
+
+    .hero span{
+        font-size:32px;
+    }
+
+
+    .hero-buttons a{
+        width:100%;
+        text-align:center;
+    }
+
+
+    .profile-img{
+        width:220px;
+        height:220px;
+    }
+
+
+    .section-title{
+        font-size:26px;
+    }
+
+
+    .card{
+        padding:20px;
+    }
+
+
+    footer{
+        font-size:14px;
+        text-align:center;
+    }
+
+}
+/* ==========================================================
+   TYPING TEXT RESPONSIVE
+   Only typography adjustment
+========================================================== */
+
+@media (max-width: 768px){
+
+    .typing-text{
+        font-size:20px;
+        line-height:1.45;
+        margin-top:12px;
+        max-width:100%;
+        padding:0 10px;
+    }
+
+}
+
+@media (max-width: 480px){
+
+    .typing-text{
+        font-size:17px;
+        line-height:1.45;
+        margin-top:10px;
+        padding:0 5px;
+    }
+
+}
