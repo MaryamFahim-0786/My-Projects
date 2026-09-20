@@ -30,7 +30,7 @@ export async function streamChatService(
     }
 
     try {
-        await fetchEventSource(`${API_BASE_URL}/chat`, {
+        await fetchEventSource(`${API_BASE_URL}/api/chat`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
