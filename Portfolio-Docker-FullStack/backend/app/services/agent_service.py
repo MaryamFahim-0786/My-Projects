@@ -2,8 +2,7 @@ import json
 import logging
 from typing import AsyncGenerator
 
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_community.chat_message_histories import RedisChatMessageHistory
+from langchain.prompts import ChatPromptTemplate
 
 from app.core.config import settings
 from app.services.contact_service import send_email_tool
@@ -71,13 +70,6 @@ Otherwise use English.
 **IMPORTANT:**
 Use ONLY the supplied portfolio context for specific portfolio facts.
 """
-
-
-def get_session_history(session_id: str) -> RedisChatMessageHistory:
-    return RedisChatMessageHistory(
-        session_id,
-        url=settings.REDIS_URL
-    )
 
 
 async def rag_tool_wrapper(question: str) -> str:
@@ -200,9 +192,6 @@ Never mention the words:
 - tool calling
 """
     ),
-
-    MessagesPlaceholder("chat_history"),
-
     (
         "human",
         "{input}"
@@ -225,7 +214,6 @@ async def generate_rag_response(
     try:
         # Retrieve relevant portfolio chunks
         retriever = get_retriever()
-
         docs = await retriever.ainvoke(message)
 
         if docs:
@@ -238,19 +226,12 @@ async def generate_rag_response(
                 "No relevant portfolio information was found."
             )
 
-        # Get Redis conversation history
-        history = get_session_history(session_id)
-
-        chat_history = history.messages
-
-        # Build Gemini chain
+        # Generate response without Redis history
         chain = rag_prompt | llm
 
-        # Generate response
         response = await chain.ainvoke({
             "input": message,
             "context": context,
-            "chat_history": chat_history,
         })
 
         answer = _chunk_text(
@@ -262,10 +243,6 @@ async def generate_rag_response(
                 "I couldn't generate a response right now. "
                 "Please try again."
             )
-
-        # Save conversation
-        history.add_user_message(message)
-        history.add_ai_message(answer)
 
         return answer
 
@@ -324,9 +301,9 @@ async def stream_agent_response(
     """
     Generates the chatbot response.
 
-    This version does NOT use Gemini function/tool calling.
-    It retrieves BM25 context first and then sends the
-    context directly to Gemini.
+    Uses BM25 retrieval + Gemini.
+    Redis conversation history is intentionally disabled
+    for serverless/Vercel compatibility.
     """
 
     try:
@@ -337,7 +314,7 @@ async def stream_agent_response(
             }
         )
 
-        # Retrieve documents
+        # Check retriever
         if not is_retriever_ready():
             yield format_sse_event(
                 "error",
@@ -350,6 +327,7 @@ async def stream_agent_response(
             )
             return
 
+        # Retrieve relevant portfolio documents
         retriever = get_retriever()
 
         docs = await retriever.ainvoke(message)
@@ -371,18 +349,12 @@ async def stream_agent_response(
             }
         )
 
-        # Redis history
-        history = get_session_history(session_id)
-
-        chat_history = history.messages
-
         # Gemini chain
         chain = rag_prompt | llm
 
         response = await chain.ainvoke({
             "input": message,
             "context": context,
-            "chat_history": chat_history,
         })
 
         answer = _chunk_text(
@@ -394,10 +366,6 @@ async def stream_agent_response(
                 "I couldn't generate a response right now. "
                 "Please try again."
             )
-
-        # Save conversation
-        history.add_user_message(message)
-        history.add_ai_message(answer)
 
         # Send response
         yield format_sse_event(
