@@ -1,0 +1,94 @@
+### Maryam Fahim - Resume Summary
+
+This document contains detailed information about Maryam Fahim's experience, skills and education to help the AI assistant answer specific questions.
+
+---
+
+## Contact Information
+- **Name:** Maryam Fahim
+- **Title:** AI Full-Stack Developer
+- **Location:** Burewala, Punjab, Pakistan
+- **GitHub:** https://github.com/MaryamFahim-0786
+- **LinkedIn:** https://www.linkedin.com/in/maryam-fahim-9b2111339
+- **WhatsApp:** https://wa.me/923340079140 (the phone number is intentionally not written out on the site; visitors use the WhatsApp link or the contact form)
+- **Previous portfolio:** https://portfolio-maryamfahim.vercel.app/
+- **Languages:** English, Urdu
+
+---
+
+## Professional Experience
+
+### Intern at Falcon Swift
+**Duration:** 8 weeks (completed)
+**Outcome:** Completed the internship and received a certificate.
+**Note for the assistant:** The specific duties and technologies used during this internship are not recorded in this knowledge base. If asked for details, say that Maryam completed an 8-week internship at Falcon Swift with a certificate, and suggest the visitor use the contact form or LinkedIn to ask her directly. Do not invent responsibilities.
+
+---
+
+## Education
+
+### BS Computer Science - COMSATS University Islamabad, Vehari Campus
+**Period:** 2023 - 2028 (undergraduate, currently in the 7th semester)
+**CGPA:** 3.75
+
+### FSc Pre-Engineering - Government Graduate College, Burewala
+**Period:** 2021 - 2023
+
+### Matric - Allied School Canal Campus, Burewala
+**Period:** 2019 - 2021
+
+---
+
+## Certifications & Awards
+- Participation Certificate - CodeAlpha
+- Internship Certificate - Falcon Swift (8-week internship)
+
+---
+
+## Technical Skills & Expertise
+
+### 1. AI & LLM Engineering (Current Focus)
+*   **Frameworks:** LangChain, LangGraph.
+*   **Patterns:** Retrieval-Augmented Generation (RAG), tool-calling agents, conversation memory, source citations, LLM summarisation.
+*   **Model providers used in projects:** Google Gemini, OpenAI (GPT-4o-mini and embeddings), Groq (OpenAI-compatible API). The Crypto AI Assistant can switch between Gemini, Anthropic and OpenAI.
+*   **Vector stores:** PostgreSQL with pgvector, ChromaDB.
+*   **Also:** Machine Learning fundamentals, Python data processing.
+
+### 2. Web & Backend Development
+*   **Backend:** FastAPI, Flask, Node.js, Express.js, REST APIs, JWT authentication.
+*   **Frontend:** React, Next.js, Vite, HTML5, CSS3, JavaScript, TypeScript, Tailwind CSS, responsive design, Leaflet maps, Recharts charts.
+*   **Desktop:** Electron (wrapper for the Crypto AI Assistant), Python Tkinter (Bank and Car Rental systems).
+
+### 3. Programming Languages
+*   **Primary:** Python, JavaScript, TypeScript.
+*   **Also:** Java (OOP academic projects), C++ (basics), SQL, PHP and Laravel (basics).
+
+### 4. Databases
+*   PostgreSQL (with pgvector), SQLite, MongoDB, MySQL, Mongoose.
+
+### 5. Tools
+*   Git, GitHub, Docker, Postman, Figma, VS Code, Linux basics.
+
+---
+
+## Additional Academic Projects (earlier work)
+- Ludo Game and Dice Rolling Game in Java
+- Task Mania mobile app in Flutter
+- Student Management System in Java (CRUD, OOP)
+- Coffee Shop Management website using HTML, CSS, JavaScript, PHP and Laravel
+- To-Do List app in JavaScript
+- Earlier personal portfolio websites (HTML/CSS and React)
+
+---
+
+## Career Goal
+To become an AI Engineer who builds intelligent products, SaaS applications and AI-powered platforms for global users.
+
+---
+
+## Key Strengths
+- Builds complete AI applications: backend, retrieval pipeline, database, authentication and UI
+- Hands-on with RAG, tool-calling agents and LangGraph
+- Careful engineering habits in Python systems (hashing, validation, transactions, tests, CSV reports)
+- Quick learner who ships projects to learn new tools
+- Clear documentation (READMEs with setup, architecture and features)

@@ -1,0 +1,20 @@
+PROJECT: Maryam's News - AI News Assistant
+CREATOR: Maryam Fahim
+TYPE: Full-Stack AI Application
+STATUS: Working project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/Maryams-News-Chatbot
+SOURCE MATERIAL: Project README
+
+--- EXECUTIVE SUMMARY ---
+A full-stack AI news assistant. A FastAPI backend pulls live headlines and uses Google Gemini for summaries and chat; a React (Vite) frontend presents the news as a modern editorial reading experience with an "AI Briefing" panel docked next to the feed.
+
+--- TECH STACK ---
+**Backend:** FastAPI with routers for news, chat and summarise; Pydantic schemas; environment-driven settings; CORS configuration
+**AI:** Google Gemini
+**News data:** NewsAPI.org
+**Frontend:** React with Vite (components: Masthead, CategoryNav, FeaturedStory, ArticleList, AIBriefing)
+
+--- KEY FEATURES ---
+- Live top headlines by category: Top, Business, Technology, Sports, Health, Science, Entertainment, plus full-text search
+- One-click AI summary on any article, expanding inline into a short summary and key points
+- "AI Briefing" chat panel for asking questions about the news; a story can be sent into the conversation as context

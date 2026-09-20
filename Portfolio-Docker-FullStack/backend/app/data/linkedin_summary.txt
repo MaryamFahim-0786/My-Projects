@@ -1,0 +1,19 @@
+### LinkedIn / Professional Profile Summary for Maryam Fahim
+
+This document is a short professional profile of Maryam Fahim, written to be a reliable source for the chatbot's knowledge base.
+
+LinkedIn: https://www.linkedin.com/in/maryam-fahim-9b2111339
+GitHub: https://github.com/MaryamFahim-0786
+
+#### About
+I'm an AI Full-Stack Developer and a Computer Science undergraduate. I build LLM-powered applications - RAG chatbots, tool-calling agents and AI dashboards - using Python (FastAPI, Flask), LangChain and LangGraph, vector databases (PostgreSQL with pgvector, ChromaDB) and modern front ends (Next.js, React).
+
+I'm in the 7th semester of my BS in Computer Science at COMSATS University Islamabad, Vehari Campus (2023 - 2028). I completed an 8-week internship at Falcon Swift and received a certificate.
+
+I'm passionate about turning AI ideas into complete, usable products, and I'm looking for opportunities to keep growing as an AI engineer on a team that builds meaningful software.
+
+#### Focus Areas
+Artificial Intelligence, Machine Learning concepts, Full-Stack Development, UI / UX design.
+
+#### Featured Work
+Meridian (advanced Gemini chatbot), AI Weather Platform, Crypto AI Assistant, Maryam's News (AI news assistant), Simple RAG Chatbot, RAG Chatbot (LangChain + ChromaDB), and Python systems for banking, library and car-rental management.

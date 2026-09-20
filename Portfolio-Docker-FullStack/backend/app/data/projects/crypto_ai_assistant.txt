@@ -1,0 +1,27 @@
+PROJECT: Crypto AI Assistant
+CREATOR: Maryam Fahim
+TYPE: Full-Stack AI Application (dashboard + LangChain agent + desktop app)
+STATUS: Working project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/Crypto-AI-Assistant
+SOURCE MATERIAL: Project README
+
+--- EXECUTIVE SUMMARY ---
+A live cryptocurrency dashboard with an AI market-intelligence chatbot. It has three parts: a Flask + LangChain backend, a Next.js dashboard, and an Electron wrapper that turns the dashboard into a desktop app.
+
+--- TECH STACK ---
+**Backend:** Flask, LangChain agent
+**Market data:** CoinGecko public API (with caching, retry/backoff and an optional API key), with CryptoCompare as a best-effort fallback when CoinGecko is rate-limited; news via free RSS feeds
+**LLM:** configurable provider - Google Gemini (default), Anthropic or OpenAI
+**Frontend:** Next.js dashboard
+**Desktop:** Electron (packaging with npm run dist for .exe / .dmg / .AppImage)
+
+--- KEY FEATURES ---
+- Live price cards for 6+ coins that auto-refresh every 30 seconds
+- Historical price graph with 7-day, 30-day and 90-day toggles and a coin selector
+- AI chatbot (LangChain agent) with three live tools: get_live_price, compare_coins, get_price_trend
+- Replies in the language the user writes in (English, Urdu/Roman Urdu, Hindi)
+- Larger built-in coin catalogue and search that remembers discovered symbols
+- Text-first assistant with an animated market-intelligence signal line under the dashboard
+
+--- NOTE ---
+This project uses Flask (not FastAPI) and does not use a vector database.

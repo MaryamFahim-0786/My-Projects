@@ -1,0 +1,27 @@
+PROJECT: Bank Management System
+CREATOR: Maryam Fahim
+TYPE: Desktop / CLI application (Python, SQLite)
+STATUS: Complete academic project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/Bank-Management-System
+SOURCE MATERIAL: Project READMEs and source code
+
+--- EXECUTIVE SUMMARY ---
+A secure, menu-driven banking system in Python 3 with SQLite3 and an object-oriented architecture. It has both a terminal interface and a Tkinter GUI. It follows double-entry bookkeeping principles, uses atomic transactions with rollback, PBKDF2 password hashing and exact Decimal arithmetic for money.
+
+--- TECH STACK ---
+Python 3, SQLite3, OOP with separate models, services and CLI layers, Tkinter/ttk for the GUI (no third-party GUI package), CSV export, unit tests.
+
+--- ADMINISTRATOR PORTAL ---
+- Live dashboard: customers, accounts, active/frozen/closed breakdown, total vault balance, deposits and withdrawals
+- Customer lifecycle: register with Pakistani-format validation (CNIC, mobile, email, date of birth), search, update, block/unblock, safe delete
+- Account operations: unique 10-digit account numbers, Savings and Current accounts, freeze/unfreeze, close (zero-balance rule)
+- Transaction auditing with filters, statistical reports and one-click CSV export
+
+--- CUSTOMER PORTAL ---
+- Self-registration and secure login, profile updates, balance inquiry, deposits, withdrawals and transfers with transaction history
+
+--- SECURITY & QUALITY ---
+- Salted PBKDF2 password hashing; passwords are never stored in plain text
+- Decimal arithmetic instead of floats for money
+- Atomic database transactions with rollback
+- Automated tests (tests/test_banking_system.py)

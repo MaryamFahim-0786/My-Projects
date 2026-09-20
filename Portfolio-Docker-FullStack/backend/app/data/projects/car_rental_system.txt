@@ -1,0 +1,21 @@
+PROJECT: Car Rental Management System
+CREATOR: Maryam Fahim
+TYPE: Desktop GUI application (Python, Tkinter, SQLite)
+STATUS: Complete academic project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/Maryam-Fahim-Car-Rental-System
+SOURCE MATERIAL: Project README
+
+--- EXECUTIVE SUMMARY ---
+A modular, secure car-rental system with a modern Tkinter GUI, SQLite3 for ACID-compliant relational data and an object-oriented design. It covers fleet management, rentals, payments and analytics.
+
+--- KEY FEATURES ---
+- Authentication and role-based access: administrator portal and customer self-service registration, with Pakistani-format validation (CNIC, mobile, email) and salted PBKDF2-HMAC-SHA256 password hashing
+- Vehicle fleet management: add, edit, safe delete and search; categories such as Economy, Sedan, SUV, Luxury, Sports, Van and Hatchback; status Available / Rented / Maintenance; duplicate registration prevention
+- Rental agreements: booking wizard with automatic date calculation, total = daily rate x days, security deposit kept separate from rental charges, safe database transactions
+- Returns and late penalties: late charge = overdue days x daily rate; availability restored on check-in
+- Digital receipts: structured invoices that can be saved as text files
+- Financial ledger: payments by cash, card or bank transfer with Paid / Pending / Refunded status
+- Reports: KPI dashboard (fleet, customers, active/completed rentals, revenue) and CSV exports for cars, customers, rentals, payments and revenue
+
+--- TECH STACK ---
+Python, Tkinter, SQLite3, OOP, CSV export.

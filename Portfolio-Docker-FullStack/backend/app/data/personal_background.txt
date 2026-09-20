@@ -1,0 +1,52 @@
+# Biography & Personal Attributes
+
+## Who I Am
+I'm Maryam Fahim, an AI Full-Stack Developer and Computer Science undergraduate from Pakistan. I build applications where a language model is a real part of the product: RAG chatbots that answer from your own documents, tool-calling agents that fetch live data, and the web backends and interfaces around them. I'm currently in the 7th semester of my BS Computer Science degree at COMSATS University Islamabad, Vehari Campus, and I completed an 8-week internship at Falcon Swift (with a certificate).
+
+## How My Journey Started
+* **2022 - Programming fundamentals:** I began with C++ and Python and learned to break problems into small steps.
+* **2023 - Web development:** I started my BS in Computer Science and built responsive websites with HTML, CSS and JavaScript.
+* **2024 - Full-stack and ML foundations:** I worked with the MERN stack (MongoDB, Express, React, Node.js), databases, REST APIs and machine-learning concepts.
+* **2025 - Practical projects:** I built and refined portfolio work and academic software projects (Java, Flutter, PHP/Laravel, JavaScript).
+* **Now - AI full-stack engineering:** I build LLM applications with Python, FastAPI, LangChain, LangGraph, vector databases and Next.js/React front ends.
+* **Where I'm heading:** I want to become an AI Engineer who builds intelligent products, SaaS applications and AI-powered platforms for users around the world.
+
+## What Shapes My Work
+
+### 1. Building things end to end
+I like owning a feature from the data layer to the screen. My AI projects usually include a Python backend (FastAPI or Flask), an AI layer (LangChain / LangGraph / direct Gemini calls), a database (PostgreSQL with pgvector, ChromaDB or SQLite) and a user interface (Next.js or React).
+
+### 2. Careful, safe engineering
+In my Python systems (Bank Management System, Library Management System, Car Rental System) I focus on the details that make software trustworthy: salted password hashing (PBKDF2), input validation, exact Decimal arithmetic for money, database transactions with rollback, role-based access, CSV report export and unit tests where the project has them.
+
+### 3. Grounded AI
+In my RAG projects the goal is that the model answers from real documents and shows which chunks were used, instead of guessing. I care about retrieval quality, citations, conversation memory and choosing the right tool for each question.
+
+### 4. Learning by shipping
+I learn new tools by building something with them: LangGraph for the weather agent, pgvector for semantic search, Electron for a desktop wrapper, Leaflet and Recharts for data visualisation.
+
+## Languages
+English and Urdu.
+
+## Skills I List on My Resume Beyond Code
+Time management and leadership.
+
+---
+
+If asked "What makes you stand out?", focus on: building complete AI applications (not just notebooks), the variety of AI patterns I have implemented (RAG, tool-calling agents, live-data agents), careful engineering habits in my Python systems, and how quickly I keep learning. Stay humble - I'm still an undergraduate and my professional experience so far is my internship.
+
+### 1. Complete AI Applications
+I don't stop at a prompt. My projects include the API, the retrieval pipeline, the database, the authentication and the UI, and I document them with clear READMEs and setup steps.
+
+### 2. Range of AI Patterns
+* **RAG with pgvector:** Meridian and the Simple RAG Chatbot.
+* **RAG with ChromaDB:** the LangChain-based RAG Chatbot (CLI).
+* **Tool-calling agents:** Crypto AI Assistant (live prices, comparisons, trends) and Meridian (web search, calculator).
+* **LangGraph agent with live data:** AI Weather Platform.
+* **LLM summarisation and chat over live news:** Maryam's News.
+
+### 3. Engineering Habits
+Validation, hashing, transactions, logging, CSV exports and tests - I apply these even in academic projects because that's how real systems are built.
+
+### 4. Always Learning
+I move quickly between languages and frameworks (Python, TypeScript, Java, React, Next.js, FastAPI, Flask) and I'm actively deepening my AI engineering skills.

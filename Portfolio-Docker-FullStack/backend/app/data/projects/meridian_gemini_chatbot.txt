@@ -1,0 +1,34 @@
+PROJECT: Meridian - Advanced Gemini Chatbot
+CREATOR: Maryam Fahim
+TYPE: Full-Stack Generative AI Application (RAG + Agent + Auth)
+STATUS: Working project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/meridian-gemini-chatbot
+SOURCE MATERIAL: Project README and source code
+
+--- EXECUTIVE SUMMARY ---
+Meridian is a production-style chatbot built on Google Gemini. It combines RAG over each user's own uploaded documents, per-user persistent memory, a tool-calling agent (live web search and a calculator), and full email/password authentication.
+
+--- TECH STACK ---
+**Frontend:** Next.js 14 (App Router), React, Tailwind CSS (login, sign-up and chat UI)
+**Backend:** FastAPI, LangChain with langchain-google-genai
+**LLM and embeddings:** Google Gemini (chat) and text-embedding-004 (embeddings)
+**Database:** PostgreSQL with pgvector - a single database for authentication, chat history and vector search
+**Auth:** JWT access and refresh tokens, bcrypt password hashing
+**Infra:** Docker Compose (Postgres + pgvector, backend)
+
+--- HOW A CHAT TURN WORKS ---
+1. The frontend sends the message, conversation id and flags (use RAG, use tools) to the chat endpoint.
+2. The backend loads the last 20 messages of the conversation as short-term memory.
+3. If RAG is enabled, it embeds the query and retrieves the top 4 most similar chunks from that user's own documents using pgvector cosine distance.
+4. A LangChain tool-calling Gemini agent receives the system prompt, RAG context, history and new message, and can call the web_search or calculator tool.
+5. Both messages are saved and the conversation is auto-titled from the first message.
+
+--- KEY FEATURES ---
+- Per-user document RAG (documents are private to each user)
+- Persistent conversation memory
+- Agent tools: web search and calculator
+- JWT authentication with refresh tokens
+- Database models for users, conversations, messages and document chunks
+
+--- NOTE ---
+Meridian uses PostgreSQL + pgvector (not ChromaDB or Pinecone) and Gemini (not OpenAI).

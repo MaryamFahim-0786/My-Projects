@@ -1,0 +1,28 @@
+PROJECT: AI Weather Intelligence Platform
+CREATOR: Maryam Fahim
+TYPE: Full-Stack AI Application (LangGraph agent + live data dashboard)
+STATUS: Working project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/AI-Weather-Platform
+SOURCE MATERIAL: Backend and frontend source code
+
+--- EXECUTIVE SUMMARY ---
+A weather dashboard with an AI assistant. Users search a location and see live conditions, an hourly forecast, a 7-day forecast and an interactive map, and they can ask the AI questions about the weather in natural language.
+
+--- HOW THE AI AGENT WORKS ---
+The assistant is a LangGraph agent. It reads the user's question, detects whether a specific city is mentioned, and if so geocodes that city and fetches its weather; otherwise it falls back to the location currently selected in the app's search bar. It then writes a natural-language answer from freshly fetched data. It also recognises earthquake-related questions and can use recent earthquake data.
+
+--- TECH STACK ---
+**Backend:** FastAPI (API version 2.1.0), Python
+**AI:** LangChain + LangGraph, using Groq through its OpenAI-compatible API
+**Data sources:** Open-Meteo (weather and geocoding), USGS (earthquakes)
+**Frontend:** Next.js and React with TypeScript, Leaflet (OpenStreetMap) for the interactive map, Recharts for charts, Tailwind CSS
+**Deployment config:** the backend includes a Vercel configuration file
+
+--- KEY FEATURES ---
+- Live weather, hourly forecast and 7-day forecast
+- Interactive map of the selected location
+- AI weather assistant that understands which city the user means
+- Location search using country/state/city data
+
+--- NOTE ---
+This project uses LangGraph with Groq. It does not use pgvector or RAG.

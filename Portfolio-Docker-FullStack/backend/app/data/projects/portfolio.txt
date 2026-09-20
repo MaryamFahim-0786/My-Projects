@@ -1,0 +1,31 @@
+PROJECT: AI Portfolio Assistant (this website)
+CREATOR: Template by Roy Amit (open source, MIT License); customised and personalised by Maryam Fahim
+TYPE: Full-Stack Generative AI Application (RAG)
+STATUS: Running locally with Docker Compose
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects
+SOURCE MATERIAL: Project README, docker-compose configuration, backend and frontend source
+
+--- HONEST ATTRIBUTION ---
+This portfolio is built on an open-source AI portfolio template created by Roy Amit and released under the MIT License. I did not design the original architecture. My work was to adapt it into my own portfolio: replacing the knowledge base with my own background, projects and skills, rewriting the assistant's persona and prompt, rebranding the interface, and running and debugging the full stack (frontend, backend, PostgreSQL and Redis) with Docker Compose. If a visitor asks who built the template, say so plainly.
+
+--- EXECUTIVE SUMMARY ---
+Instead of a static page, this portfolio is a conversation. Visitors chat with an AI assistant that answers questions about me using Retrieval-Augmented Generation over my own documents. It streams answers token by token and shows when it is searching the knowledge base.
+
+--- HOW IT WORKS (TEMPLATE ARCHITECTURE) ---
+1. Hybrid search: combines pgvector semantic search with BM25 keyword search so both meaning and exact terms (names, tools) are matched.
+2. Single agent with tools: one OpenAI-powered agent (LangChain) that can search the knowledge base and email a resume link.
+3. Server-Sent Events: the backend streams structured events (tool start, tool end, tokens) so the interface can show what the assistant is doing.
+4. Chat memory in Redis, embeddings and documents in PostgreSQL with pgvector.
+
+--- TECH STACK ---
+**Backend (Python):** FastAPI, LangChain, OpenAI, PostgreSQL + pgvector, Redis, Resend (email)
+**Frontend:** Next.js 14 (App Router), React, Tailwind CSS, Framer Motion
+**Infrastructure:** Docker and Docker Compose
+
+--- KEY FEATURES ---
+- AI chat interface about my work, skills and experience
+- Transparent AI status while it searches
+- Project carousel, skills grid and resume viewer
+- Command palette (type / for /projects, /skills, /resume, /contact)
+- Contact form that emails me
+- Interactive tour guide and dark UI

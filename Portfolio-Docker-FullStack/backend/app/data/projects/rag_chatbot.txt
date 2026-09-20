@@ -1,0 +1,29 @@
+PROJECT: RAG Chatbot (LangChain + ChromaDB)
+CREATOR: Maryam Fahim
+TYPE: Retrieval-Augmented Generation (RAG) application, command line
+STATUS: Working project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/RAG-Chatbot
+SOURCE MATERIAL: Project README
+
+--- EXECUTIVE SUMMARY ---
+A modular, educational Retrieval-Augmented Generation chatbot in Python. It answers questions from user-provided documents instead of relying only on the model's pre-trained knowledge, which reduces hallucinations and allows source attribution. It was designed to be simple enough to explain clearly in a viva while following professional design patterns.
+
+--- PIPELINE ---
+Ingestion: load documents (.pdf, .txt, .docx, .md) -> extract text (pypdf, python-docx) -> clean and normalise text -> chunk with a recursive splitter (800-character chunks, 100 overlap) -> embed -> store in ChromaDB.
+Querying: embed the question -> retrieve the most relevant chunks -> build a prompt with the retrieved context -> generate a grounded answer.
+
+--- TECH STACK ---
+**Language:** Python 3.10+
+**Orchestration:** LangChain (langchain, langchain-core, langchain-openai, langchain-chroma)
+**Vector database:** ChromaDB
+**LLM and embeddings:** OpenAI (gpt-4o-mini and text-embedding-3-small)
+**Document parsing:** pypdf and python-docx
+**Config:** python-dotenv
+
+--- KEY FEATURES ---
+- Modular files: document loader, text splitter, vector store, RAG pipeline, prompts, chatbot and utilities
+- Interactive command-line chat with commands
+- Tests and a viva / interview guide in the README
+
+--- NOTE ---
+This project uses ChromaDB and OpenAI. Do not confuse it with Meridian or the Simple RAG Chatbot, which use pgvector and Gemini.

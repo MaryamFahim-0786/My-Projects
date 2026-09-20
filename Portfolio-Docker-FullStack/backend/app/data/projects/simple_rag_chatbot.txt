@@ -1,0 +1,25 @@
+PROJECT: Simple RAG Chatbot (Gemini + FastAPI + Postgres/pgvector)
+CREATOR: Maryam Fahim
+TYPE: Retrieval-Augmented Generation (RAG) application
+STATUS: Working project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/Simple-RAG-Chatbot
+SOURCE MATERIAL: Project README
+
+--- EXECUTIVE SUMMARY ---
+A deliberately lean RAG project with a real production-style pipeline. Users upload documents, then ask questions; answers are grounded in the retrieved chunks and cite which chunks were used.
+
+--- TECH STACK ---
+**Backend:** FastAPI, Python, Pydantic - direct google-generativeai SDK calls, deliberately without LangChain to keep dependencies small and the code easy to read
+**Database:** PostgreSQL with pgvector (works with Supabase)
+**LLM and embeddings:** Gemini for chat and gemini-embedding-001 for embeddings
+**Frontend:** a single static HTML/JS page served by FastAPI itself - no build step and no Node required
+
+--- KEY FEATURES ---
+- Multi-file upload: PDF, DOCX, TXT, MD and CSV, each chunked and embedded
+- Real vector similarity search with pgvector (not keyword matching)
+- Answers cite the retrieved chunks
+- Session-based chat history stored in Postgres so it survives a page refresh
+- Clean separation of concerns: LLM calls, RAG ingestion/retrieval and chat history live in separate service modules
+
+--- NOTE ---
+Unlike Meridian, this project has no login and no agent tools; it is intentionally single-session. It uses no LangChain.

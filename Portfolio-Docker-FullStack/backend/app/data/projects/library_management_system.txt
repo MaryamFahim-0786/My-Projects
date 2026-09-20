@@ -1,0 +1,23 @@
+PROJECT: Library Management System
+CREATOR: Maryam Fahim
+TYPE: Command-line application (Python, SQLite)
+STATUS: Complete academic project; source code on GitHub
+REPOSITORY: https://github.com/MaryamFahim-0786/My-Projects/tree/main/Library-Management-System
+SOURCE MATERIAL: Project README
+
+--- EXECUTIVE SUMMARY ---
+A complete CLI library system in Python 3 with SQLite3 that manages books, members, borrowing, returns, reservations, fines, authentication and reporting through a structured terminal interface.
+
+--- TECH STACK ---
+Python 3 standard library only (no external packages): SQLite3, hashlib for password hashing, getpass for hidden password entry, csv, datetime, decimal for accurate fine calculation, and logging. Built with OOP: separate models (admin, author, category, publisher, book, member, borrowing, fine, reservation) and service classes (authentication, books, members, borrowing and more).
+
+--- KEY FEATURES ---
+- Book management: add, update, delete and search
+- Member management: register, update, block/unblock
+- Separate admin and member login with password hashing and login protection
+- Borrow, return and renew with automatic quantity updates
+- Automatic due dates and overdue fine calculation
+- Book reservations with status management
+- Reports and analytics, plus CSV export
+- Input validation (email, phone, ISBN) and activity/transaction logging
+- Seed data script for demos
